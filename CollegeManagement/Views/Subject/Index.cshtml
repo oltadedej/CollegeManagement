@@ -1,0 +1,76 @@
+﻿@model IEnumerable<CollegeManagementCore.Concrete.Subject>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+
+            @Html.DisplayNameFor(model => model.TeacherId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CourseId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SubjectName)
+        </th>
+       
+        <th>
+            Number of Students
+        </th>
+        <th> Grade (AVG)</th>
+    </tr>
+
+@foreach (var item in Model) {
+
+    var student = 0;
+    CollegeManagementCore.Utils.Enumerators.Grade? grades = null;
+
+    if (item.Enrollments != null && item.Enrollments.Count>0)
+    {
+     grades = (CollegeManagementCore.Utils.Enumerators.Grade)item.Enrollments.Select(i => (int?)i.Grade).Average();
+
+    }
+    student = item.Enrollments.Select(i => i.StudentID).Count();
+
+    <tr>
+        <td>
+            @{
+                CollegeManagementCore.Service.Contract.ITeacherService srv = new CollegeManagementCore.Service.TeacherService();
+                var teacher = srv.GetTeacherById(item.TeacherId);
+                @Html.DisplayFor(i => teacher.FullName)
+            }
+        </td>
+        <td>
+            @{
+                CollegeManagementCore.Service.Contract.ICourseService coursesrv = new CollegeManagementCore.Service.CourseService();
+                var course = coursesrv.GetCourseByID(item.CourseId);
+                @Html.DisplayFor(i => course.Title)
+            }
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SubjectName)
+        </td>
+       
+        <td>
+            @Html.DisplayFor(i => student)
+        </td>
+        <td>
+            @Html.DisplayFor(i => grades)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+        </td>
+    </tr>
+}
+
+</table>

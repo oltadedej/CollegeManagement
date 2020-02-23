@@ -1,0 +1,149 @@
+﻿@model IEnumerable<CollegeManagementCore.Concrete.Course>
+
+@{
+    /**/
+
+    ViewBag.Title = "Courses";
+}
+
+<h2>Courses</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Credits)
+        </th>
+        <th>
+            Grades (avg)
+        </th>
+
+
+        <th>
+            Teachers
+
+        </th>
+        <th>
+            Students
+        </th>
+        <th></th>
+    </tr>
+
+    @{
+
+    }
+    @foreach (var item in Model)
+    {
+
+        int nrofTeachers = item.Subjects.Count(i => i.TeacherId != 0);
+        var student = 0;
+        CollegeManagementCore.Utils.Enumerators.Grade? grades = null;
+        foreach (var subject in item.Subjects)
+        {
+            if (subject.Enrollments != null && subject.Enrollments.Count > 0)
+            {
+
+                grades = (CollegeManagementCore.Utils.Enumerators.Grade)subject.Enrollments.Select(i => (int?)i.Grade).Average();
+            }
+            student = subject.Enrollments.Select(i => i.StudentID).Count();
+
+        }
+
+
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Credits)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => grades)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => nrofTeachers)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => student)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+            </td>
+        </tr>
+    }
+
+</table>
+
+<div class="col-12 col-md-12" id="chat">
+    <fieldset>
+        <legend>
+            <a class="customIcon customIconIcon"><i class="fa fa-info-circle text-danger fa-nor" data-placement="top"></i></a> Signal R Module
+        </legend>
+        <div class="panel panel-primary">
+            <div class="panel-heading" id="accordion">
+                <span class="glyphicon glyphicon-comment"></span> Signal R Chat
+                <div class="btn-group pull-right">
+                    <a type="button" class="btn btn-link btn-xs" data-toggle="collapse" data-parent="#accordion" aria-expanded="false" href="#collapseOne">
+                        <span class="glyphicon glyphicon-chevron-down" style="color:white"></span>
+                    </a>
+                   </div>
+            </div>
+            <div class="panel-collapse collapse in" id="collapseOne">
+                <div class="panel-body">
+                    <table class="table">
+                        <tr>
+                            <th>Course Name e Credits</th>
+                        </tr>
+                    </table>
+                    <ul class="chat" id="discussion"></ul>
+
+              </div>
+                <div class="panel-footer">
+                    <div class="view-group">
+
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </fieldset>
+</div>
+@section scripts {
+    <script src="~/Scripts/jquery.signalR-2.4.1.min.js"></script>
+    <script src="~/signalr/hubs"></script>
+    <script type="text/javascript">
+    $(document).ready(function () {
+            siteCommunication();
+        });
+        // SignalR communication
+        function siteCommunication() {
+            var site = $.connection.siteHub;
+
+            site.client.readMessageToPage = function (courseName, courseCredits) {
+                // Add the message to the page.
+                $('#discussion').append('<li>' + (courseName) + ' &nbsp ' + (courseCredits) + '</li>');
+            };
+            // Start the connection.
+            $.connection.hub.start().done(function () {
+                site.server.read();
+
+            });
+
+        };</script>
+}

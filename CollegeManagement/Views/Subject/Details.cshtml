@@ -1,0 +1,51 @@
+﻿@model CollegeManagementCore.Concrete.Subject
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Subject</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TeacherId)
+        </dt>
+
+        <dd>
+            @{
+
+                CollegeManagementCore.Service.Contract.ITeacherService srv = new CollegeManagementCore.Service.TeacherService();
+                var teacher = srv.GetTeacherById(Model.TeacherId);
+                @Html.DisplayFor(i => teacher.FullName)
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CourseId)
+        </dt>
+
+        <dd>
+            @{
+                CollegeManagementCore.Service.Contract.ICourseService coursesrv = new CollegeManagementCore.Service.CourseService();
+                var course = coursesrv.GetCourseByID(Model.CourseId);
+                @Html.DisplayFor(i => course.Title)
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SubjectName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SubjectName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,94 @@
+﻿@model CollegeManagementCore.Concrete.Student
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Student</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstMidName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstMidName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RegistrationNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RegistrationNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EnrollmentDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EnrollmentDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Birthday)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Birthday)
+        </dd>
+        <dt>
+
+            @Html.DisplayNameFor(model => model.Enrollments)
+        </dt>
+
+        <dd>
+            
+            <table class="table">
+               <tr>
+                   <th>Grade</th>
+                   <th>Subject Name</th>
+               </tr>
+                @foreach (var enrollment in Model.Enrollments)
+                {
+                    <tr>
+                        <td>
+                        @Html.DisplayFor(i => enrollment.Grade)
+                        </td>
+                        <td>
+                            @{
+
+                                CollegeManagementCore.Service.Contract.ISubjectService srv = new CollegeManagementCore.Service.SubjectService();
+                                var subject = srv.GetSubjectById(enrollment.SubjectID);
+                                @Html.DisplayFor(i =>subject.SubjectName)
+
+                            }
+
+
+                        </td>
+                
+                </tr>
+                    
+
+                }
+                
+            </table>
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
