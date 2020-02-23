@@ -187,7 +187,9 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -241,8 +243,8 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\CollegeManagementCore\CollegeManagementCore.csproj">
-      <Project>{eeaca271-8234-4e33-b656-5e9051714039}</Project>
+    <ProjectReference Include="..\CollegeManagementCore\CollegeManagementCore.csproj">
+      <Project>{61693db2-52e4-4e09-b2d2-d8b99440a392}</Project>
       <Name>CollegeManagementCore</Name>
     </ProjectReference>
   </ItemGroup>

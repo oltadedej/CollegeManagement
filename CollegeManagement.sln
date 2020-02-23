@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.28307.960
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CollegeManagement", "CollegeManagement\CollegeManagement.csproj", "{3BAD08E3-7FCE-45CB-B7A2-E42936B08090}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CollegeManagementCore", "..\CollegeManagementCore\CollegeManagementCore.csproj", "{EEACA271-8234-4E33-B656-5E9051714039}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CollegeManagementCore", "CollegeManagementCore\CollegeManagementCore.csproj", "{61693DB2-52E4-4E09-B2D2-D8B99440A392}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{3BAD08E3-7FCE-45CB-B7A2-E42936B08090}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3BAD08E3-7FCE-45CB-B7A2-E42936B08090}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3BAD08E3-7FCE-45CB-B7A2-E42936B08090}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EEACA271-8234-4E33-B656-5E9051714039}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EEACA271-8234-4E33-B656-5E9051714039}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EEACA271-8234-4E33-B656-5E9051714039}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EEACA271-8234-4E33-B656-5E9051714039}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61693DB2-52E4-4E09-B2D2-D8B99440A392}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61693DB2-52E4-4E09-B2D2-D8B99440A392}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61693DB2-52E4-4E09-B2D2-D8B99440A392}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61693DB2-52E4-4E09-B2D2-D8B99440A392}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
